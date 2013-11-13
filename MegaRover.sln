@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MegaRover", "MegaRover\MegaRover.vcxproj", "{4584E4BE-AC7E-47DC-AF61-58F6F31D492C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SerialForwarder", "SerialForwarder\SerialForwarder.vcxproj", "{B219394F-3F8D-4D4F-A1EE-E7E635381594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4584E4BE-AC7E-47DC-AF61-58F6F31D492C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4584E4BE-AC7E-47DC-AF61-58F6F31D492C}.Debug|Win32.Build.0 = Debug|Win32
+		{4584E4BE-AC7E-47DC-AF61-58F6F31D492C}.Release|Win32.ActiveCfg = Release|Win32
+		{4584E4BE-AC7E-47DC-AF61-58F6F31D492C}.Release|Win32.Build.0 = Release|Win32
+		{B219394F-3F8D-4D4F-A1EE-E7E635381594}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B219394F-3F8D-4D4F-A1EE-E7E635381594}.Debug|Win32.Build.0 = Debug|Win32
+		{B219394F-3F8D-4D4F-A1EE-E7E635381594}.Release|Win32.ActiveCfg = Release|Win32
+		{B219394F-3F8D-4D4F-A1EE-E7E635381594}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
