@@ -14,11 +14,7 @@ void glfwErrorCallback(int error, const char* description)
 	cerr << description << endl;
 }
 
-#ifdef UNICODE
-int wmain()
-#elif
-int main()
-#endif
+int _tmain()
 {
 	io_service ioSvc;
 
@@ -42,6 +38,7 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		glClearColor(0.f, 0.2f, 0.2f, 0.f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		auto s = src.read();
