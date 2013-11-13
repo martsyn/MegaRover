@@ -3,24 +3,16 @@
 
 #include "stdafx.h"
 
+#include "SimulatedSensorSource.h"
+
 using namespace std;
 using namespace boost::asio;
-using boost::asio::ip::tcp;
 
 
-struct Sensors
+void glfwErrorCallback(int error, const char* description)
 {
-	short cpx;
-	short cpy;
-	short cpz;
-};
-
-const char *SerialPort = 
-#ifdef WIN32
-	"COM3";
-#elif
-	"/dev/ttyACM0";
-#endif
+	cerr << description << endl;
+}
 
 #ifdef UNICODE
 int wmain()
@@ -30,36 +22,29 @@ int main()
 {
 	io_service ioSvc;
 
-	//serial_port source(ioSvc, SerialPort);
-	//source.set_option(serial_port_base::baud_rate(115200));
+	if (!glfwInit())
+		return -1;
 
+	glfwSetErrorCallback(glfwErrorCallback);
 
-	tcp::socket source(ioSvc);
-	tcp::resolver resolver(ioSvc);
-	tcp::resolver::query query("192.168.137.130", "34678");
-	connect(source, resolver.resolve(query));
+	auto window = glfwCreateWindow(640, 640, "Hellow", nullptr, nullptr);
 
-	glfwInit();
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
+	
+	glfwMakeContextCurrent(window);
 
-	const int XSize = 640, YSize = 640;
+	//SimulatedSensorSource src(ioSvc);
+	SimulatedSensorSource src;
 
-	glfwOpenWindow(XSize, YSize, 0, 0, 0, 0, 0, 0, GLFW_WINDOW);
-
-	do
+	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		char c;
-		read(source, buffer(&c, 1));
-		if (c != 0x3d)
-			continue;
-		
-		read(source, buffer(&c, 1));
-		if (c != 0x5c)
-			continue;
-
-		Sensors s;
-		read(source, buffer(&s,sizeof(s)));
+		auto s = src.read();
 
 		float len = sqrtf((float) s.cpx*s.cpx + s.cpy*s.cpy /*+ s.cpz*s.cpz*/);
 		float angle = atan2f(s.cpy, s.cpx);
@@ -78,8 +63,9 @@ int main()
 		glVertex3f(s.cpy*scale, s.cpx*scale, /*s.cpz*scale*/ 0);
 		glEnd();
 
-		glfwSwapBuffers();
-	} while (glfwGetWindowParam(GLFW_OPENED));
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+	}
 
 	glfwTerminate();
 	return 0;

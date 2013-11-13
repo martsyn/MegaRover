@@ -12,8 +12,4 @@
 #include <tchar.h>
 
 #include <boost/asio.hpp>
-
-#include <GL/glfw.h>
-
-
-// TODO: reference additional headers your program requires here
+#include <GLFW/glfw3.h>
